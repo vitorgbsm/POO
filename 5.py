@@ -28,3 +28,4 @@ class ContaBancaria:
 
 
 c = ContaBancaria(".")
+c.depositar(200)
