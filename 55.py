@@ -3,9 +3,11 @@ class ContaBancaria:
         self.titular = titular
         self.__saldo = 0
 
+    @property
     def get__saldo(self):
         return self.__saldo
 
+    @get__saldo.setter
     def set_saldo(self, valor):
         if valor < 0:
             print("Saldo indisponivel")
@@ -27,6 +29,6 @@ class ContaBancaria:
 minha_conta = ContaBancaria("maria")
 minha_conta.depositar(500)
 minha_conta.sacar(200)
-print(f"Saldo: {minha_conta.get__saldo()}")
-minha_conta.set_saldo(250)
-print(f"Saldo:{minha_conta.get__saldo()}")
+print(f"Saldo: {minha_conta.get__saldo}")
+minha_conta.set_saldo = 250
+print(f"Saldo: {minha_conta.get__saldo}")
