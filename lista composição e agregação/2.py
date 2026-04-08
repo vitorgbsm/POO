@@ -3,7 +3,7 @@ class Motor:
         self.potencia = potencia
 
     def ligar(self):
-        print(f"Motor de {self.potencia} cavalos ligado.")
+        return f"Motor de {self.potencia} cavalos ligado."
 
 class Carro:
     def __init__(self, modelo, motor):
@@ -11,4 +11,7 @@ class Carro:
         self.motor = motor 
 
     def ligar_carro(self):
-        print(f"Ligando o {self.modelo}...") 
+        return f"Ligando o {self.modelo}..."
+
+m = Motor("")
+c = Carro("Toyota", m)
