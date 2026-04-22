@@ -26,8 +26,8 @@ class Pedido:
 
 item1 = ItemPedido("Celular", 2000, 1300.00)
 item2 = ItemPedido("Tablet", 200, 2500.00)
-p = Pedido()
-p.adicionar_item(item1)
-p.adicionar_item(item2)
-p.listar_itens()
-p.calcular_total()
+pedido = Pedido()
+pedido.adicionar_item(item1)
+pedido.adicionar_item(item2)
+pedido.listar_itens()
+pedido.calcular_total()
