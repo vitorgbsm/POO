@@ -22,7 +22,7 @@ class Desenvolvedor(Funcionario):
     def exibir_dados(self):
         print(f"Nome: {self.nome}, Linguagem de programação utilizada: {self.linguagem} , salario: R${self.salario}")
 
-gerente = Gerente("Vitor", 7500, 3000)
-desenvolvedor = Desenvolvedor("Helia", 12000, "Python")
+gerente = Gerente("Vitor", 12200, 3000)
+desenvolvedor = Desenvolvedor("Helia", 7500, "Python")
 gerente.exibir_dados()
 desenvolvedor.exibir_dados()

@@ -31,3 +31,14 @@ class CarroEletrico(Carro):
         super().__init__(modelo, motor)
         self.motor = MotorEletrico(motor)
 
+m = Motor(1200)
+m.ligar()
+c = Carro("Fusca", m)
+c.ligar_carro()
+
+print("\n-----------------\n")
+
+me = MotorEletrico(1500)
+me.ligar()
+ce = CarroEletrico("Geely", me)
+ce.ligar_carro()
