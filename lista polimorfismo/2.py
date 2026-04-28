@@ -2,13 +2,13 @@ class Animal:
     def emitir_som(self):
         return 'Algum som generico'
 
-class Cachorro:
+class Cachorro(Animal):
     def emitir_som(self):
         return 'Latido'
 
-class Gato:
+class Gato(Animal):
     def emitir_som(self):
-        return 'Miado'
+        return 'Miau'
 
 animais = [Animal(), Cachorro(), Gato()]
 for animal in animais:
