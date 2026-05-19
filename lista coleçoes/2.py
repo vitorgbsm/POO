@@ -1,6 +1,6 @@
 contagem = {}
 while True:
-    e = input(int("Digite o ano de nascmento"))
+    e = input("Digite o ano de nascmento")
 
     if e == "":
         break
@@ -12,3 +12,7 @@ while True:
 
         else:
             contagem[ano] = 1
+
+print("Relatório:")
+for ano in sorted(contagem):
+    print(f"{ano}: {contagem[ano]}")
