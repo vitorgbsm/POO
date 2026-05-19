@@ -15,4 +15,4 @@ while True:
 
 print("Relatório:")
 for ano in sorted(contagem):
-    print(f"{ano}: {contagem[ano]}")
+   print(f"{ano}: {contagem[ano]}")

@@ -1,7 +1,7 @@
 agenda = {}
 
 def adicionar_contato (agenda, nome, telefone):
-    agenda[nome] = telefone
+    agenda[nome] = telefone #adiciona na lista o nome como chave e telefone valor
     return 'Contato adicionado!'
 
 def buscar_telefone(agenda, nome):
