@@ -2,10 +2,14 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog
 
 class ContaBancaria:
+
+    numeros_contas = []
+
     def __init__(self, titular, numero, saldo):
         self.__titular = titular
         self.__numero = numero
         self.__saldo = saldo
+        ContaBancaria.numeros_contas.append(numero)
 
     def get_titular(self):
         return self.__titular
@@ -15,6 +19,14 @@ class ContaBancaria:
        
     def get_saldo(self):
         return self.__saldo
+    
+    @classmethod
+    def verificar_conta_duplicada(cls):
+        return len(cls.numeros_contas) != len(set(cls.numeros_contas))
+    
+    def contas_duplicadas(cls, lista):
+        n_repetidos = set()
+        repetidos = set()
 
 class BancoApp:
     def __init__(self, janela):
@@ -24,10 +36,15 @@ class BancoApp:
 
         self.contas = [
             ContaBancaria("João", 1001, 500),
-            ContaBancaria("Maria", 1002, 1000),
+            ContaBancaria("Maria", 1001, 1000),
             ContaBancaria("Pedro", 1003, 300),
             ContaBancaria("Esther", 1004, 20)
         ]
+
+        if(self.contas[0].verificar_conta_duplicada()):
+            messagebox.showerror("Erro", "Existe conta duplicada")
+            messagebox.showinfo("contas", self.contas[0].contas_duplicadas())
+            exit()
 
         self.criar_interface()
 
