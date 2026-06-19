@@ -24,27 +24,41 @@ class ContaBancaria:
     def verificar_conta_duplicada(cls):
         return len(cls.numeros_contas) != len(set(cls.numeros_contas))
     
-    def contas_duplicadas(cls, lista):
-        pass
-
-    def exibir_dados(self):
-        return f'Titular: {self.__titular};\nNumero da conta: {self.__numero};\nSaldo: R${self.__saldo}.'
-
+    @classmethod
+    def contas_duplicadas(cls):
+        repetidos = set()
+        n_repetidos = []
+        for x in cls.numeros_contas:
+            if ContaBancaria.numeros_contas.count(x) > 1:
+                repetidos.add(x)
+            else:
+                n_repetidos.append(x)
+        return f'{repetidos}'
+        
     def depositar(self, valor):
         if valor > 0:
             self.__saldo += valor
+            return True
         else:
-            return "Deposito nao pode ser negativo"
+            return False
 
-    def sacar(self):
-        pass
+    def sacar(self, valor):
+        if valor > 0:
+            self.__saldo -= valor
+            return True
+        else:
+            return False
 
-    def transferir(self):
-        pass
-
-
-
-
+    def transferir(self, valor, conta_destino):
+        if valor > 0:
+            self.__saldo -= valor
+            conta_destino.depositar(valor)
+            return True
+        else:
+            return False
+        
+    def exibir_dados(self):
+        return f'Titular: {self.__titular}\nNumero da conta: {self.__numero}\nSaldo: R${self.__saldo}'
 
 class BancoApp:
     def __init__(self, janela):
@@ -61,7 +75,7 @@ class BancoApp:
 
         if(self.contas[0].verificar_conta_duplicada()):
             messagebox.showerror("Erro", "Existe conta duplicada")
-            messagebox.showinfo("contas", self.contas[0].contas_duplicadas(ContaBancaria.numeros_contas))
+            messagebox.showinfo("contas", self.contas[0].contas_duplicadas())
             exit()
 
         self.criar_interface()
@@ -119,7 +133,7 @@ class BancoApp:
                 width=15,
                 command=lambda c=conta: self.depositar(c)
             )
-            #btn_depositar.config(state="disabled")
+            # btn_depositar.config(state="disabled")
             btn_depositar.pack(pady=2)
 
             btn_sacar = tk.Button(
@@ -128,7 +142,7 @@ class BancoApp:
                 width=15,
                 command=lambda c=conta: self.sacar(c)
             )
-            btn_sacar.config(state="disabled")
+            # btn_sacar.config(state="disabled")
             btn_sacar.pack(pady=2)
 
             btn_transferir = tk.Button(
@@ -137,7 +151,7 @@ class BancoApp:
                 width=15,
                 command=lambda c=conta: self.transferir(c)
             )
-            btn_transferir.config(state="disabled")
+            # btn_transferir.config(state="disabled")
             btn_transferir.pack(pady=2)
 
             btn_dados = tk.Button(
@@ -146,7 +160,7 @@ class BancoApp:
                 width=15,
                 command=lambda c=conta: self.exibir_dados(c)
             )
-            #btn_dados.config(state="disabled")
+            # btn_dados.config(state="disabled")
             btn_dados.pack(pady=2)
 
     def depositar(self, conta):
