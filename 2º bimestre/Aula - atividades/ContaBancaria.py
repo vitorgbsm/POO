@@ -43,14 +43,14 @@ class ContaBancaria:
             return False
 
     def sacar(self, valor):
-        if valor > 0:
+        if valor > 0 and valor <= self.__saldo:
             self.__saldo -= valor
             return True
         else:
             return False
 
     def transferir(self, valor, conta_destino):
-        if valor > 0:
+        if valor > 0 and valor <= self.__saldo:
             self.__saldo -= valor
             conta_destino.depositar(valor)
             return True
