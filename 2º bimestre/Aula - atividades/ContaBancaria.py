@@ -2,15 +2,10 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog
 
 
-class Endereco:
-    def __init__(self):
-        pass
-
 class Cliente:
-    def __init__(self, nome, cpf, endereco:Endereco):
+    def __init__(self, nome:str, cpf:str):
         self.__nome = nome
         self.__cpf = cpf
-        #self.__endereco = Endereco
     
     def get_nome(self):
         return self.__nome
@@ -18,16 +13,19 @@ class Cliente:
     def get_cpf(self):
         return self.__cpf
     
-    #def get_endereco(self):
-        return self.__endereco
+    def get_endereco(self):
+        return 'oi'
+    
+    def exibir_dados(self):
+        return f'Titular: {self.__nome} \nCPF: {self.__cpf}'
 
 
 class ContaBancaria:
 
     numeros_contas = []
 
-    def __init__(self, titular:Cliente, numero, saldo):
-        self.__titular = Cliente
+    def __init__(self, titular, numero, saldo):
+        self.__titular = titular
         self.__numero = numero
         self.__saldo = saldo
         ContaBancaria.numeros_contas.append(numero)
@@ -87,11 +85,14 @@ class BancoApp:
         self.janela.title("Sistema Bancário - POO em Python")
         self.janela.geometry("850x400")
 
+        cliente1 = Cliente("Helia", "164913")
+        print(cliente1.exibir_dados())
+
         self.contas = [
-            ContaBancaria("João", 1001, 500),
-            ContaBancaria("Maria", 1002, 1000),
-            ContaBancaria("Pedro", 1003, 300),
-            ContaBancaria("Esther", 1004, 20)
+            ContaBancaria(cliente1, 1001, 500)
+            # ContaBancaria("Maria", 1002, 1000),
+            # ContaBancaria("Pedro", 1003, 300),
+            # ContaBancaria("Esther", 1004, 20)
         ]
 
         if(self.contas[0].verificar_conta_duplicada()):
