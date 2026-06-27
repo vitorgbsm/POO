@@ -1,11 +1,36 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 
+# Alunos: Vitor Gabriel e Hélia Rafaela
+
+class Endereço:
+    def __init__(self, rua, numero, bairro, cidade):
+        self.__rua = rua
+        self.__numero = int(numero)
+        self.__bairro = bairro
+        self.__cidade = cidade
+    
+    def get_rua(self):
+        return self.__rua
+    
+    def get_numero(self):
+        return self.__numero
+
+    def get_bairro(self):
+        return self.__bairro
+    
+    def get_cidade(self):
+        return self.__cidade
+
+    def exibir_dados(self):
+        return f'Rua: {self.__rua}, numero: {self.__numero}; \nBairro: {self.__bairro} \nCidade {self.__cidade}'
 
 class Cliente:
-    def __init__(self, nome:str, cpf:str):
+    def __init__(self, nome, cpf, endereço):
         self.__nome = nome
         self.__cpf = cpf
+        self.__endereço = endereço
+        self.__contas = []
     
     def get_nome(self):
         return self.__nome
@@ -14,10 +39,13 @@ class Cliente:
         return self.__cpf
     
     def get_endereco(self):
-        return 'oi'
+        return self.__endereço
+    
+    def adicionar_conta(self, cnt):
+        self.__contas.append(cnt)
     
     def exibir_dados(self):
-        return f'Titular: {self.__nome} \nCPF: {self.__cpf}'
+        return f'Nome: {self.__nome} \nCPF: {self.__cpf} \nEndereço: {self.__endereço}'
 
 
 class ContaBancaria:
@@ -31,7 +59,7 @@ class ContaBancaria:
         ContaBancaria.numeros_contas.append(numero)
 
     def get_titular(self):
-        return self.__titular
+        return self.__titular.get_nome()
        
     def get_numero(self):
         return self.__numero
@@ -77,7 +105,7 @@ class ContaBancaria:
             return False
         
     def exibir_dados(self):
-        return f'Titular: {self.__titular}\nNumero da conta: {self.__numero}\nSaldo: R${self.__saldo}'
+        return f'CONTA:\nTitular: {self.__titular.get_nome()}\nNumero da conta: {self.__numero}\nSaldo: R$ {self.__saldo}\nCpf: {self.__titular.get_cpf()} \n\nENDEREÇO:\n{self.__titular.get_endereco().exibir_dados()}'
 
 class BancoApp:
     def __init__(self, janela):
@@ -85,14 +113,16 @@ class BancoApp:
         self.janela.title("Sistema Bancário - POO em Python")
         self.janela.geometry("850x400")
 
-        cliente1 = Cliente("Helia", "164913")
-        print(cliente1.exibir_dados())
+        cliente1 = Cliente('Helia', '164.913', Endereço("Rua zumbi", "834", "centro", "Ceara-mirim"))
+        cliente2 = Cliente('Vitor', '124.248', Endereço("Rua Lagos", "29", "centro", "Ceara-mirim"))
+        cliente3 = Cliente('Giovanna', '943.135', Endereço("Rua Mosquito", "128", "centro", "Ceara-mirim"))
+        cliente4 = Cliente('Bernardo', '517.925', Endereço("Rua do Farol", "724", "centro", "Ceara-mirim"))
 
         self.contas = [
-            ContaBancaria(cliente1, 1001, 500)
-            # ContaBancaria("Maria", 1002, 1000),
-            # ContaBancaria("Pedro", 1003, 300),
-            # ContaBancaria("Esther", 1004, 20)
+            ContaBancaria(cliente1, 1001, 500),
+            ContaBancaria(cliente2, 1002, 1000),
+            ContaBancaria(cliente3, 1003, 300),
+            ContaBancaria(cliente4, 1004, 20)
         ]
 
         if(self.contas[0].verificar_conta_duplicada()):
