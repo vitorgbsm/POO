@@ -21,7 +21,7 @@ class Endereço:
         return self.__cidade
 
     def exibir_dados(self):
-        return f'Rua: {self.__rua}, numero: {self.__numero}; \nBairro: {self.__bairro} \nCidade {self.__cidade}'
+        return f'Rua: {self.__rua}, numero: {self.__numero} \nBairro: {self.__bairro} \nCidade {self.__cidade}'
 
 
 class Cliente:
@@ -104,7 +104,7 @@ class ContaBancaria:
             return False
         
     def exibir_dados(self):
-        return f'CONTA:\nTitular: {self.__titular.get_nome()}\nNumero da conta: {self.__numero}\nSaldo: R$ {self.__saldo}\nCpf: {self.__titular.get_cpf()} \n\nENDEREÇO:\n{self.__titular.get_endereco().exibir_dados()}'
+        return f'Conta:\nTitular: {self.__titular.get_nome()}\nNumero da conta: {self.__numero}\nSaldo: R$ {self.__saldo}\nCpf: {self.__titular.get_cpf()}\n\n---------------------------\n\nEndereço:\n{self.__titular.get_endereco().exibir_dados()}'
 
 
 class ContaCorrente(ContaBancaria):
@@ -113,9 +113,13 @@ class ContaCorrente(ContaBancaria):
         self.__limite = limite
         self.__tarifa_mensal = tarifa_mensal
 
-    def exibir_dados(self):
-        return super().exibir_dados() and f'\nLimite: {self.__limite}'
+    def sacar(self, valor):
+        pass
+    def cobrar_tarifa(self):
+        pass
 
+    def exibir_dados(self):
+        return f'{super().exibir_dados()}\n\n---------------------------\n\nLimite: {self.__limite}\nTarifa mensal: {self.__tarifa_mensal}'
 
 class ContaPoupanca(ContaBancaria):
     def __init__(self, titular, numero, saldo, taxa_rendimento):
@@ -130,7 +134,7 @@ class ContaSalario(ContaBancaria):
         self.__saques_realizados = saques_realizados
         self.__limite_saques = limites_saques
 
-
-cliente1 = ContaCorrente('Helia', '164.913', '200', '100', '10')
-a = cliente1.exibir_dados
-print(a)
+# cb = Cliente("ta", "iqowh", Endereço("jafj", "8783520", "algum", "cm"))
+# cc = ContaCorrente(cb, "1579313", "8340", "082359", "108740810")
+# infos = cc.exibir_dados()
+# print(infos)
